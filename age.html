@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c83deb;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: #eee;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        input[type=text], input[type=button] {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        input[type=button] {
+            background-color: #0761b6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type=button]:hover {
+            background-color: #003669;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Age Calculator</h2>
+        <input type="text" id="date" placeholder="DD" maxlength="2">
+        <input type="text" id="month" placeholder="MM" maxlength="2">
+        <input type="text" id="year" placeholder="YYYY" maxlength="4"><br>
+        <input type="button" value="Calculate Age" onclick="calculateAge()">
+        <p id="result"></p>
+    </div>
+
+    <script>
+    function calculateAge() {
+        var day = parseInt(document.getElementById('date').value);
+        var month = parseInt(document.getElementById('month').value);
+        var year = parseInt(document.getElementById('year').value);
+
+        var today = new Date();
+        var currentYear = today.getFullYear();
+        var currentMonth = today.getMonth() + 1;
+        var currentDay = today.getDate();
+
+        var ageYears = currentYear - year;
+        var ageMonths = currentMonth - month;
+        var ageDays = currentDay - day;
+        console.log(ageYears);
+        console.log(ageMonths);
+        console.log(ageDays);
+        
+
+        // If days are negative, adjust month and day
+        if (ageDays < 0) {
+            ageMonths--;
+            ageDays += 30; // Rough approximation
+        }
+
+        // If months are negative, adjust year and month
+        if (ageMonths < 0) {
+            ageYears--;
+            ageMonths += 12;
+        }
+
+        document.getElementById('result').innerHTML = 'Your Age is ' + ageYears + ' Years, ' + ageMonths + ' Months, and ' + ageDays + ' Days.';
+    }
+</script>
+
+</body>
+</html>
